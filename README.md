@@ -41,7 +41,7 @@ We offer three types of models as follows.
         --task "QA"
     ```
 
-    Below is the prompt used to generate the answer. You can modify it in the [link](prompts/QA.txt).
+    Below is the prompt used to generate the answer. You can modify it in the [QA link](prompts/QA.txt).
 
     ```python
     PROMPT = """\
@@ -62,7 +62,7 @@ We offer three types of models as follows.
         --task "translation"
     ```
 
-    Below is the prompt used to generate the answer. You can modify it in the [link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
+    Below is the prompt used to generate the answer. You can modify it in the [translation link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
 
     ```python
     PROMPT = """\
@@ -84,7 +84,7 @@ We offer three types of models as follows.
         --task "summarization"
     ```
 
-    Below is the prompt used to generate the answer. You can modify it in the [link](prompts/summarization.txt). It does not work for a max length of over 2048.
+    Below is the prompt used to generate the answer. You can modify it in the [summarization link](prompts/summarization.txt). It does not work for a max length of over 2048.
 
     ```python
     PROMPT = """\
