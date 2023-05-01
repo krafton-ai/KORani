@@ -12,9 +12,9 @@
 This repository contains inference code for KORani models that are based on [LLaMA 13B](https://arxiv.org/abs/2302.13971v1) and [Polyglot 12.8B](https://huggingface.co/EleutherAI/polyglot-ko-12.8b).
 KORani models are finetuned using [ShareGPT](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main) & [KoVicuna](https://github.com/melodysdreamj/KoVicuna).
 We offer three types of models as follows.
-    - 1️⃣ KORani-v1-13B: finetuned using KoVicuna dataset based on Polyglot 12.8B <https://huggingface.co/KRAFTON/KORani-v1-13B>
-    - 2️⃣ KORani-v2-13B: finetuned using KoVicuna dataset based on LLaMA 13B <https://huggingface.co/KRAFTON/KORani-v2-13B>
-    - 3️⃣ KORani-v3-13B: finetuned using ShareGPT & KoVicuna datset based on LLaMA 13B <https://huggingface.co/KRAFTON/KORani-v3-13B>
+- 1️⃣ KORani-v1-13B: finetuned using KoVicuna dataset based on Polyglot 12.8B <https://huggingface.co/KRAFTON/KORani-v1-13B>
+- 2️⃣ KORani-v2-13B: finetuned using KoVicuna dataset based on LLaMA 13B <https://huggingface.co/KRAFTON/KORani-v2-13B>
+- 3️⃣ KORani-v3-13B: finetuned using ShareGPT & KoVicuna datset based on LLaMA 13B <https://huggingface.co/KRAFTON/KORani-v3-13B>
 
 * We used LLaMA 13B from [here](https://huggingface.co/decapoda-research/llama-13b-hf).
 * We extracted only the data from [Kovicuna](https://huggingface.co/datasets/junelee/sharegpt_deepl_ko) that corresponds to the first and second parts of the conversation, which are 'human' and 'GPT'.
