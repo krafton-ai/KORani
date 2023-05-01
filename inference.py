@@ -22,12 +22,6 @@ class StoppingCriteriaSub(StoppingCriteria):
         else:
             return False
 
-
-DEFAULT_PAD_TOKEN = "[PAD]"
-DEFAULT_EOS_TOKEN = "</s>"
-DEFAULT_BOS_TOKEN = "</s>"
-DEFAULT_UNK_TOKEN = "</s>"
-
 ####################################################################################
 # python inference.py --model_path "KRAFTON/KORani-v3-13B"
 
