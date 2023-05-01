@@ -1,0 +1,7 @@
+### Instruction: Translate Korean sentence into English. You may leave specific names as they are.
+Korean: 얼마나 많은 언어를 말할 수 있니?
+English: How many languages can you speak?#
+Korean: 일 다 끝났어?
+English: Did you finish your work?#
+Korean: LLAMA 13B와 Polyglot 12.8B의 충분한 비교가 필요해 보입니다. 
+English:
