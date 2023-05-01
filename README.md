@@ -2,7 +2,7 @@
 
 - KORani: Large Language Models for 🇰🇷 Korean and 🇺🇸 English using LLaMA 13B and Polyglot 12.8B.
 - Tested which LLM is effective for 🇰🇷 Korean tasks after finetuning.
-- 🤗 You can download the models from the [Link](https://huggingface.co/KRAFTON).
+- 🤗 You can download the weights from the [Link](https://huggingface.co/KRAFTON).
 
 ### Release
 <p align="center">
