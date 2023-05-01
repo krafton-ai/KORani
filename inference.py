@@ -30,8 +30,6 @@ DEFAULT_UNK_TOKEN = "</s>"
 
 ####################################################################################
 # python inference.py --model_path "KRAFTON/KORani-v3-13B"
-# python inference.py --model_path "/home/jovyan/project_folder/FastChat/checkpoint_llama_13b_sharegpt_all" --task "translation"
-# python inference.py --model_path "decapoda-research/llama-13b-hf"
 
 
 if __name__ == "__main__" :
