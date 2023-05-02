@@ -18,7 +18,7 @@ We offer three types of models as follows.
 
 * We used LLaMA 13B from [here](https://huggingface.co/decapoda-research/llama-13b-hf).
 * We extracted only the data from [Kovicuna](https://huggingface.co/datasets/junelee/sharegpt_deepl_ko) that corresponds to the first and second parts of the conversation, which are 'human' and 'GPT'.
-* The model finetuning was conducted on eight A100 40GB GPUs. The code used for training is based on the [Link](https://github.com/lm-sys/FastChat).
+* The model finetuning was conducted on eight A100 40GB GPUs. The code used for training is based on the [Fastchat](https://github.com/lm-sys/FastChat).
 
 ### Local Setup
 
@@ -71,7 +71,7 @@ We offer three types of models as follows.
     English: How many languages can you speak?#
     Korean: 일 다 끝났어?
     English: Did you finish your work?#
-    Korean: {Target_sentence} 
+    Korean: {target_sentence} 
     English:"""
     ```
 
@@ -89,7 +89,7 @@ We offer three types of models as follows.
     ```python
     PROMPT = """\
     # Meeting note
-    {Target_document}
+    {target_document}
 
     # Summarize the meeting note into 3 Korean sentences.
     ### Output: 1)"""
