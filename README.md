@@ -61,6 +61,22 @@ We offer three types of models as follows.
     ### Assistant:"""
     ```
 
+### QA sample result
+```python
+context = ""
+question = ""
+```
+
+| Model | Target |
+| --- | ---: |
+| KORani-v1-13B |  |
+| KORani-v2-13B |  |
+| KORani-v3-13B |  |
+| Vicuna 13B |  |
+| Koalpaca-13B |  |
+| DeepL |  |
+| ChatGPT 3.5 |  |
+| GPT4 |  |
 
 ### Translation
 
@@ -83,21 +99,21 @@ We offer three types of models as follows.
     Korean:"""
     ```
 
-### Sample result
+### Translation sample result
 ```python
-source sentence = "Israel on Thursday expressed disappointment at the decision of U.S. President Donald Trump to sign a waiver to delay relocating the U.S. Embassy in Israel to Jerusalem from Tel Aviv but said it hoped a move could take place later."
+source_sentence = "Hey! I have some Kissflow Legal Review requests that are blocked by Tax and Accounting, can this be looked at?"
 ```
 
 | Model | Target |
 | --- | ---: |
-| KORani-v1-13B | "이스라엘은 목요일 미국 대통령 도널드 트럼프가 예루살렘에 있는 미국 대사관을 텔아비브에서 예루살렘으로 이전하는 것을 연기하기로 한 결정에 대해 실망을 표명했지만, 향후 이전이 이루어질 것으로 기대한다고 말했습니다." |
-| KORani-v2-13B | "이스라엘은 요일 미국 대통령 도널드 트럼프가 제안한 것으로 보이는 지중해에서 유대인 주민들을 위해 미국 영사관을 예정된 기간을 연장하지 않기로 결정한 것에 실망했지만, 이후 이루어질 수 있다는 희망을 표명했습니다." |
-| KORani-v3-13B | "이스라엘 지난 주에는 미국 대통령 도널드 트럼프가 제한 없이 영사관을 이스라엘 정부로 이전하기 위해 신청서를 제출하지 않음으로써 이스라엘을 실망시켰지만, 이스라엘은 미국이 나중에 이전을 진행할 수 있기를 바라며 희망을 표명했습니다." |
-| GPT4 | "목요일 이스라엘은 미국 대통령 도널드 트럼프가 텔아비브에서 예루살렘으로 이스라엘 미국 대사관 이전을 지연시키기 위해 면제 서명을 하는 결정에 실망감을 표현했지만, 나중에 이동이 이루어질 수 있기를 희망한다고 말했습니다." |
-| DeepL | "이스라엘은 목요일 도널드 트럼프 미국 대통령이 이스라엘 주재 미국 대사관을 텔아비브에서 예루살렘으로 이전하는 것을 연기하는 면제에 서명하기로 한 결정에 대해 유감을 표명했지만 나중에 이전이 이루어질 수 있기를 희망한다고 밝혔다." |
-| ChatGPT 3.5 | "이스라엘은 목요일 미국 대통령 도널드 트럼프가 이스라엘의 대사관을 텔아비브에서 예루살렘으로 이전하는 것을 연기하기 위해 면제서에 서명한 결정에 실망을 표명했지만, 나중에 이사가 가능할 것을 희망한다고 밝혔습니다." |
-| Vicuna 13B | "이스라엘은 주요 보고서에 기꺼이 분노하여 트럼프 대통령이 지정한 국가의 대통령이라는 자신을 인정하지 못하고 그룹의 선언문을 체포하고 싶다고 밝혔습니다." |
-| Koalpaca-13B | "이스라엘은 미국 대통령 도널드 트럼프이 예루살렘을 이스라엘의 수도로 인정한 결정에 대해 실망을 표명하며, 추후에 대사관 이전을 희망한다고 표명했다." |
+| KORani-v1-13B | "안녕하세요! 세금과 회계로 인해 막혀 있는 키스플로우 법률 검토 요청이 몇 개 있는데, 검토해 주실 수 있나요?" |
+| KORani-v2-13B | "안녕하세요! 제가 Kissflow Legal Review 요청을 목격했는데, 세무 및 회계 부서에서 차단하고 있는데 이 문제를 조사해 주시겠어요?" |
+| KORani-v3-13B | "안녕하세요! 저는 Kissflow Legal Review 요청이 세금과 회계에 의해 차단되고 있는데, 이 문제가 살펴볼 수 있을까요?" |
+| Vicuna 13B | "안녕하세요! 세금계산과 회계부서가 차단해 있는 Kissflow Legal Review 요청이 몇 개가 있습니까? 이것을 살펴보시겠습니까?" |
+| Koalpaca-13B | "야! 세금과 회계에 막힌 키싱플로우 법적 검토 요청이 있는데, 이거 검토해줄 수 있어?" |
+| DeepL | "안녕하세요! 세무 및 회계에서 차단된 Kissflow 법률 검토 요청이 몇 개 있는데요, 이 요청을 살펴볼 수 있나요?" |
+| ChatGPT 3.5 | "안녕하세요! 세무 및 회계 부서에서 차단된 몇 가지 Kissflow Legal Review 요청이 있습니다. 확인해 주실 수 있나요?" |
+| GPT4 | "헤이! 제가 Tax and Accounting에 의해 차단된 몇 가지 Kissflow 법률 검토 요청이 있는데, 이것을 확인해 주실 수 있나요?" |
 
 
 ### Summarization
@@ -118,6 +134,23 @@ source sentence = "Israel on Thursday expressed disappointment at the decision o
     # Summarize the meeting note into 3 Korean sentences.
     ### Output: 1)"""
     ```
+
+### Summarization sample result
+
+```python
+target_document = ""
+```
+
+| Model | Target |
+| --- | ---: |
+| KORani-v1-13B |  |
+| KORani-v2-13B |  |
+| KORani-v3-13B |  |
+| Vicuna 13B |  |
+| Koalpaca-13B |  |
+| DeepL |  |
+| ChatGPT 3.5 |  |
+| GPT4 |  |
 
 ## Evaluation
 We tested model performance using GPT-4, and the code and results of the test can be found through the [AutoEvalGPT](https://github.com/krafton-ai/AutoEvalGPT).
