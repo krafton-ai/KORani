@@ -59,7 +59,6 @@ if __name__ == "__main__" :
     ################################################################################
     model.eval()
 
-    # QA data is based on https://www.wikiwand.com/ko/%EB%A6%AC%EC%98%A4%EB%84%AC_%EB%A9%94%EC%8B%9C
     with open(f"prompts/{args.task}.txt") as f:
         prompt = "".join(f.readlines())
 

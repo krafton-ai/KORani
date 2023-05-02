@@ -1,4 +1,4 @@
-# Meeting note
+# Document
 AI기반 코딩 추천 시스템이란 무엇인가?
 Github의 Copilot
 OpenAI의 Codex를 활용해서 코드를 실시간으로 에디터에 작성해주는 프로그램
@@ -26,5 +26,5 @@ AI 기반 코드 추천의 강점
 코드 커버리지에 도움을 준다. 코드베이스에 누락되었거나 완성되지 않은 부분이 있는 경우에는 그 부분에 삽입할 코드를 추천하여 코드베이스의 커버리지를 높일 수 있다.
 자동화가 가능하다. 반복적인 코딩 작업을 자동화하여 개발 프로세스의 효율성을 높인다.
 
-# Summarize the meeting note into 3 Korean sentences.
-### Output: 1)
+한국어 3문장으로 위의 Document를 요약해줘.
+### Assistant: 1)

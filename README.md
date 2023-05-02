@@ -74,7 +74,6 @@ question = ""
 | KORani-v3-13B |  |
 | Vicuna 13B |  |
 | Koalpaca-13B |  |
-| DeepL |  |
 | ChatGPT 3.5 |  |
 | GPT4 |  |
 
@@ -148,7 +147,6 @@ target_document = ""
 | KORani-v3-13B |  |
 | Vicuna 13B |  |
 | Koalpaca-13B |  |
-| DeepL |  |
 | ChatGPT 3.5 |  |
 | GPT4 |  |
 
