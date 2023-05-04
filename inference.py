@@ -23,7 +23,7 @@ class StoppingCriteriaSub(StoppingCriteria):
             return False
 
 ####################################################################################
-# python inference.py --model_path "KRAFTON/KORani-v3-13B"
+# python inference.py --model_path "KRAFTON/KORani-v1-13B" --task "translation"
 
 
 if __name__ == "__main__" :
@@ -36,27 +36,16 @@ if __name__ == "__main__" :
 
     args = parser.parse_args()
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0" # if you want to use more gpus, set more numbers
 
-    tokenizer = transformers.LlamaTokenizer.from_pretrained(
+    print(args.model_path)
+    tokenizer = transformers.AutoTokenizer.from_pretrained(
         args.model_path,
         model_max_length=args.model_max_length,
         padding_side="right",
         use_fast=False,
     )
-
-    ################################################################################
-    with init_empty_weights():
-        model = transformers.LlamaForCausalLM.from_pretrained(args.model_path)
-
-    load_checkpoint_and_dispatch(
-        model, 
-        args.model_path, 
-        device_map="auto",
-        dtype='float16', 
-    )
-
-    ################################################################################
+    model = transformers.AutoModelForCausalLM.from_pretrained(args.model_path, device_map="auto", torch_dtype=torch.float16)        
     model.eval()
 
     with open(f"prompts/{args.task}.txt") as f:
@@ -71,7 +60,7 @@ if __name__ == "__main__" :
     batch["input_ids"] = batch["input_ids"].cuda()
 
 
-    stop_tokens = [[13, 2277, 29937, 12968, 29901]]
+    stop_tokens = [[13, 2277, 29937, 12968, 29901]] # decoded output: '\n### Human:'
     stop_words_ids = [torch.tensor(stop_word).to(device='cuda', dtype=torch.int64) for stop_word in stop_tokens]
     encounters = 1
     stopping_criteria = StoppingCriteriaList([StoppingCriteriaSub(stops=stop_words_ids, encounters=encounters)])
@@ -79,7 +68,7 @@ if __name__ == "__main__" :
     generation_config = GenerationConfig(
         temperature = 0.1,
         max_new_tokens = 512,
-        exponential_decay_length_penalty = (1024, 1.03),
+        exponential_decay_length_penalty = (512, 1.03),
         eos_token_id = tokenizer.eos_token_id,
         repetition_penalty = 1.1,
         do_sample = True,
@@ -91,4 +80,8 @@ if __name__ == "__main__" :
 
     generated = model.generate(batch["input_ids"], generation_config=generation_config, stopping_criteria=stopping_criteria)
     response = tokenizer.decode(generated['sequences'][0][prompt_size:], skip_special_tokens=True)
+    
+    if args.task == "translation" : # for post-processing translation output easily
+        response = response.split(" #")[0]
+    
     print(response)
