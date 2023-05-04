@@ -43,23 +43,23 @@ We offer three types of models as follows.
 
 ### Question Answering
 
-    ```bash
-    python inference.py \
-        --model_path "KRAFTON/KORani-v3-13B"
-        --task "QA"
-    ```
+```bash
+python inference.py \
+    --model_path "KRAFTON/KORani-v3-13B"
+    --task "QA"
+```
 
-    Below is the prompt used to generate the answer. You can modify it in the [QA link](prompts/QA.txt).
+Below is the prompt used to generate the answer. You can modify it in the [QA link](prompts/QA.txt).
 
-    ```python
-    PROMPT = """\
-    우리는 아래와 같은 정보를 갖고 있습니다.
-    ---------------------
-    {context}
-    ---------------------
-    ### 주어진 정보에 따라, 질문에 답해주세요.: '{question}'
-    ### Assistant:"""
-    ```
+```python
+PROMPT = """
+우리는 아래와 같은 정보를 갖고 있습니다.
+---------------------
+{context}
+---------------------
+### 주어진 정보에 따라, 질문에 답해주세요.: '{question}'
+### Assistant:"""
+```
 
 ### QA sample result
 ```python
@@ -82,24 +82,24 @@ question = "헨리 구스타프의 뇌는 현재 어디에 위치해 있는가?"
 
 ### Translation
 
-    ```bash
-    python inference.py \
-        --model_path "KRAFTON/KORani-v3-13B"
-        --task "translation"
-    ```
+```bash
+python inference.py \
+    --model_path "KRAFTON/KORani-v3-13B"
+    --task "translation"
+```
 
-    Below is the prompt used to generate the answer. You can modify it in the [translation link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
+Below is the prompt used to generate the answer. You can modify it in the [translation link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
 
-    ```python
-    PROMPT = """\
-    ### Instruction: Translate English sentence into Korean. You may leave specific names as they are.
-    English: 얼마나 많은 언어를 말할 수 있니?
-    Korean: How many languages can you speak?#
-    English: 일 다 끝났어?
-    Korean: Did you finish your work?#
-    English: {source_sentence} 
-    Korean:"""
-    ```
+```python
+PROMPT = """\
+### Instruction: Translate English sentence into Korean. You may leave specific names as they are.
+English: 얼마나 많은 언어를 말할 수 있니?
+Korean: How many languages can you speak?#
+English: 일 다 끝났어?
+Korean: Did you finish your work?#
+English: {source_sentence} 
+Korean:"""
+```
 
 ### Translation sample result
 ```python
@@ -120,22 +120,22 @@ source_sentence = "Hey! I have some Kissflow Legal Review requests that are bloc
 
 ### Summarization
 
-    ```bash
-    python inference.py \
-        --model_path "KRAFTON/KORani-v3-13B"
-        --task "summarization"
-    ```
+```bash
+python inference.py \
+    --model_path "KRAFTON/KORani-v3-13B"
+    --task "summarization"
+```
 
-    Below is the prompt used to generate the answer. You can modify it in the [summarization link](prompts/summarization.txt). It does not work for a max length of over 2048.
+Below is the prompt used to generate the answer. You can modify it in the [summarization link](prompts/summarization.txt). It does not work for a max length of over 2048.
 
-    ```python
-    PROMPT = """\
-    # Meeting note
-    {target_document}
+```python
+PROMPT = """\
+# Meeting note
+{target_document}
 
-    # Summarize the meeting note into 3 Korean sentences.
-    ### Output: 1)"""
-    ```
+# Summarize the meeting note into 3 Korean sentences.
+### Output: 1)"""
+```
 
 ### Summarization sample result
 
