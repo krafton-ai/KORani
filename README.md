@@ -1,3 +1,8 @@
+<p align="center">
+<a href=""><img src="assets/korani2.png" width="20%"></a>
+</p>
+
+
 # KORani
 
 - KORani: Large Language Models for 🇰🇷 Korean and 🇺🇸 English using LLaMA 13B and Polyglot 12.8B.
@@ -5,10 +10,6 @@
 - 🤗 You can download the weights from the [Link](https://huggingface.co/KRAFTON).
 
 ## Release
-<p align="center">
-<a href=""><img src="assets/KORani.png" width="20%"></a>
-</p>
- 
 This repository contains inference code for KORani models that are based on [LLaMA 13B](https://arxiv.org/abs/2302.13971v1) and [Polyglot 12.8B](https://huggingface.co/EleutherAI/polyglot-ko-12.8b).
 KORani models are finetuned using [ShareGPT](https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/tree/main) & [KoVicuna](https://huggingface.co/datasets/junelee/sharegpt_deepl_ko) dataset. This work is hugely influenced by [Vicuna](https://github.com/lm-sys/FastChat) project.
 
@@ -44,16 +45,13 @@ We offer three types of models as follows.
 ### Question Answering
 
 ```bash
-python inference.py \
-    --model_path "KRAFTON/KORani-v3-13B"
-    --task "QA"
+python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "QA"
 ```
 
 Below is the prompt used to generate the answer. You can modify it in the [QA link](prompts/QA.txt).
 
 ```python
-PROMPT = """
-우리는 아래와 같은 정보를 갖고 있습니다.
+PROMPT = """우리는 아래와 같은 정보를 갖고 있습니다.
 ---------------------
 {context}
 ---------------------
@@ -83,16 +81,13 @@ question = "헨리 구스타프의 뇌는 현재 어디에 위치해 있는가?"
 ### Translation
 
 ```bash
-python inference.py \
-    --model_path "KRAFTON/KORani-v3-13B"
-    --task "translation"
+python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "translation"
 ```
 
 Below is the prompt used to generate the answer. You can modify it in the [translation link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
 
 ```python
-PROMPT = """\
-### Instruction: Translate English sentence into Korean. You may leave specific names as they are.
+PROMPT = """### Instruction: Translate English sentence into Korean. You may leave specific names as they are.
 English: 얼마나 많은 언어를 말할 수 있니?
 Korean: How many languages can you speak?#
 English: 일 다 끝났어?
@@ -121,16 +116,13 @@ source_sentence = "Hey! I have some Kissflow Legal Review requests that are bloc
 ### Summarization
 
 ```bash
-python inference.py \
-    --model_path "KRAFTON/KORani-v3-13B"
-    --task "summarization"
+python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "summarization"
 ```
 
 Below is the prompt used to generate the answer. You can modify it in the [summarization link](prompts/summarization.txt). It does not work for a max length of over 2048.
 
 ```python
-PROMPT = """\
-# Meeting note
+PROMPT = """# Meeting note
 {target_document}
 
 # Summarize the meeting note into 3 Korean sentences.
