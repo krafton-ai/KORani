@@ -53,14 +53,15 @@ if __name__ == "__main__" :
 
     batch = tokenizer(prompt, return_tensors="pt")
     prompt_size = len(batch['input_ids'][0])
-    batch = {
-        "input_ids" : batch['input_ids'],
-        "attention_mask" : batch['attention_mask']
-    }
-    batch["input_ids"] = batch["input_ids"].cuda()
+    batch = {k: v.cuda() for k, v in batch.items()}
+    # batch = {
+    #     "input_ids" : batch['input_ids'],
+    #     "attention_mask" : batch['attention_mask']
+    # }
+    # batch["input_ids"] = batch["input_ids"].cuda()
 
 
-    stop_tokens = [[13, 2277, 29937, 12968, 29901]] # decoded output: '\n### Human:'
+    stop_tokens = [[13, 2277, 29937, 12968, 29901],[535],[187,187],[13,13], [13, 2277, 29937, 4007, 22137],[13, 2659, 29901],[202, 6], [6,6,6], [6805, 341, 29]]
     stop_words_ids = [torch.tensor(stop_word).to(device='cuda', dtype=torch.int64) for stop_word in stop_tokens]
     encounters = 1
     stopping_criteria = StoppingCriteriaList([StoppingCriteriaSub(stops=stop_words_ids, encounters=encounters)])
@@ -70,7 +71,7 @@ if __name__ == "__main__" :
         max_new_tokens = 512,
         exponential_decay_length_penalty = (512, 1.03),
         eos_token_id = tokenizer.eos_token_id,
-        repetition_penalty = 1.1,
+        repetition_penalty = 1.05,
         do_sample = True,
         top_p = 0.7,
         min_length = 5,
@@ -78,10 +79,11 @@ if __name__ == "__main__" :
         return_dict_in_generate = True,
     )
 
-    generated = model.generate(batch["input_ids"], generation_config=generation_config, stopping_criteria=stopping_criteria)
+    generated = model.generate(**batch, generation_config=generation_config, stopping_criteria=stopping_criteria)
     response = tokenizer.decode(generated['sequences'][0][prompt_size:], skip_special_tokens=True)
     
-    if args.task == "translation" : # for post-processing translation output easily
-        response = response.split(" #")[0]
+    # for post-processing translation output easily
+    # if args.task == "translation" : 
+    response = response.split("#")[0]
     
     print(response)
