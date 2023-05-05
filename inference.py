@@ -1,7 +1,6 @@
 import transformers
 from transformers import AutoTokenizer, AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList, GenerationConfig
 import torch
-from accelerate import load_checkpoint_and_dispatch, init_empty_weights
 import os, argparse
 
 class StoppingCriteriaSub(StoppingCriteria):
@@ -14,7 +13,6 @@ class StoppingCriteriaSub(StoppingCriteria):
 
     def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor):
         for stop in self.stops:
-                # stop = torch.LongTensor(stop).to(device='cuda')
                 if torch.all((stop == input_ids[0][-len(stop):])).item():
                     self.counter += 1
         if self.counter >= self.encounters:
@@ -54,14 +52,10 @@ if __name__ == "__main__" :
     batch = tokenizer(prompt, return_tensors="pt")
     prompt_size = len(batch['input_ids'][0])
     batch = {k: v.cuda() for k, v in batch.items()}
-    # batch = {
-    #     "input_ids" : batch['input_ids'],
-    #     "attention_mask" : batch['attention_mask']
-    # }
-    # batch["input_ids"] = batch["input_ids"].cuda()
 
-
+    # It is the definition of stop tokens by instruct tuning. You can omit or add to it as you prefer. e.g. '\n### Human:'
     stop_tokens = [[13, 2277, 29937, 12968, 29901],[535],[187,187],[13,13], [13, 2277, 29937, 4007, 22137],[13, 2659, 29901],[202, 6], [6,6,6], [6805, 341, 29]]
+
     stop_words_ids = [torch.tensor(stop_word).to(device='cuda', dtype=torch.int64) for stop_word in stop_tokens]
     encounters = 1
     stopping_criteria = StoppingCriteriaList([StoppingCriteriaSub(stops=stop_words_ids, encounters=encounters)])
@@ -82,8 +76,7 @@ if __name__ == "__main__" :
     generated = model.generate(**batch, generation_config=generation_config, stopping_criteria=stopping_criteria)
     response = tokenizer.decode(generated['sequences'][0][prompt_size:], skip_special_tokens=True)
     
-    # for post-processing translation output easily
-    # if args.task == "translation" : 
+    # post-processing
     response = response.split("#")[0]
     
     print(response)
