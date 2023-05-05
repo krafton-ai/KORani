@@ -38,8 +38,8 @@ We offer three types of models as follows.
 
 ## Inference
 ### Command <br>
-    --model_path (str): model path for evaluation. (e.g. KRAFTON/KORani-v3-13B)
-    --task (str): choose which task you want to evaluate. (e.g. only [QA, summarization, translation] are available in this repo.)
+`--model_path` (str): model path for evaluation. (e.g. KRAFTON/KORani-v3-13B) <br>
+`--task` (str): choose which task you want to evaluate. (e.g. only [QA, summarization, translation] are available in this repo.)
 
 
 ### Question Answering
