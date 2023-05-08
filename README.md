@@ -36,19 +36,27 @@ We offer three types of models as follows.
    pip install -r requirements.txt
    ```
 
-## Inference
-### Command <br>
-`--model_path` (str): model path for evaluation. (e.g. KRAFTON/KORani-v3-13B) <br>
+## How to use
+1. Prepare your prompt at `prompts/{task_name}.txt`
+2. Run `inference.py`
+```bash
+python inference.py --model_path MODEL_NAME --task TASK_NAME
+```
+### Command
+`--model_path` (str): model path for evaluation. (e.g. KRAFTON/KORani-v3-13B)  
 `--task` (str): choose which task you want to evaluate. (e.g. only [QA, summarization, translation] are available in this repo.)
 
+## Examples
+You can check how to get the evaluation score in the tables from this git repository. 
+https://github.com/krafton-ai/AutoEvalGPT
 
-### Question Answering
+### 1. Question Answering (QA)
 
 ```bash
 python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "QA"
 ```
 
-Below is the prompt used to generate the answer. You can modify it in the [QA link](prompts/QA.txt).
+This is the prompt for QA task. You can modify it in the [QA.txt](prompts/QA.txt).
 
 ```python
 PROMPT = """우리는 아래와 같은 정보를 갖고 있습니다.
@@ -59,7 +67,7 @@ PROMPT = """우리는 아래와 같은 정보를 갖고 있습니다.
 ### Assistant:"""
 ```
 
-### QA sample result
+For example,
 ```python
 context = "헨리 구스타프 몰래슨(영어: Henry Gustav Molaison, 1926년 2월 26일 ~ 2008년 12월 2일)은 뇌전증을 치료하기 위해서 수술적으로 해마를 포함한 내측측두엽이 제거된 미국의 기억장애 환자 H.M으로 전부터 이미 알려져 있었다. 
 그는 1957년 말부터 그가 죽을 때 까지 그는 광범위하게 연구가 되었다. 그의 경우는 뇌 기능과 기억 사이의 링크를 설명하는 이론 발달과 뇌인지심리학의 발달, 뇌의 구조와 기능이 특정 심리적 과정과 관한 이해를 목표로 하는 심리학의 한 지점에 매우 중요한 역할을 하였다. 
@@ -68,23 +76,23 @@ context = "헨리 구스타프 몰래슨(영어: Henry Gustav Molaison, 1926년 
 question = "헨리 구스타프의 뇌는 현재 어디에 위치해 있는가?"
 ```
 
-| Model | Target |
-| --- | ---: |
-| KORani-v1-13B | 헨리 구스타프 몰레이슨의 뇌는 현재 미국 샌디에이고에 있습니다. 그의 뇌는 1957년 수술로 제거된 그의 내측 측두엽의 자리를 확인하기 위해 조직학적으로 절단되었습니다. 이 연구는 뇌의 구조와 기능이 특정 심리적 과정과 관련된 이해를 목표로 하는 심리학의 한 분야인 인지 신경과학에 대한 그의 공헌을 기리기 위한 것입니다." |
-| KORani-v2-13B | 헨리 구스타프의 뇌는 현재 캘리포니아 샌디에이고에 있는 샌디에이고 대학교 웨스트 캠퍼스의 신경과학 실험실에 보관되어 있습니다. |
-| KORani-v3-13B | 헨리 구스타프의 뇌는 현재 코네티컷 주 윈저 락스에 있는 관리 기관에 있습니다.  |
-| Vicuna 13B | 헨리 구스타프의 뇌는 2009년 12월 4일에 조직학적으로 슬라이스되어 미국 샌디에이고에 있습니다. |
-| Koalpaca-13B | Henry Gustav Molaison의 뇌는 2008년에 사망하였습니다. 그의 뇌는 코네티컷 주 윈저 락스에 위치한 기관에 보관되어 있으며, 현재도 계속 조사중입니다. |
-| ChatGPT 3.5 | 헨리 구스타프의 뇌는 지금 2009년 12월 4일에 조직학적으로 슬라이스되어 미국 샌디에이고에 있다. |
-| GPT4 | 헨리 구스타프의 뇌는 현재 미국 샌디에이고에 위치해 있다. |
+| Model | Score (averaged over 5 examples) | Output Example |
+| --- | :---: | ---: | 
+| GPT-4 | - | 헨리 구스타프의 뇌는 현재 미국 샌디에이고에 위치해 있다. |
+| GPT-3.5-turbo | 7.1 | 헨리 구스타프의 뇌는 지금 2009년 12월 4일에 조직학적으로 슬라이스되어 미국 샌디에이고에 있다. |
+| Vicuna-13B | 7.2 | 헨리 구스타프의 뇌는 2009년 12월 4일에 조직학적으로 슬라이스되어 미국 샌디에이고에 있습니다. |
+| KoAlpaca-13B | 2.6 | Henry Gustav Molaison의 뇌는 2008년에 사망하였습니다. 그의 뇌는 코네티컷 주 윈저 락스에 위치한 기관에 보관되어 있으며, 현재도 계속 조사중입니다. |
+| KORani-v1 | 6.6 | 헨리 구스타프 몰레이슨의 뇌는 현재 미국 샌디에이고에 있습니다. 그의 뇌는 1957년 수술로 제거된 그의 내측 측두엽의 자리를 확인하기 위해 조직학적으로 절단되었습니다. 이 연구는 뇌의 구조와 기능이 특정 심리적 과정과 관련된 이해를 목표로 하는 심리학의 한 분야인 인지 신경과학에 대한 그의 공헌을 기리기 위한 것입니다." |
+| KORani-v2 | 8.0 | 헨리 구스타프의 뇌는 현재 캘리포니아 샌디에이고에 있는 샌디에이고 대학교 웨스트 캠퍼스의 신경과학 실험실에 보관되어 있습니다. |
+| KORani-v3 | 6.4 | 헨리 구스타프의 뇌는 현재 코네티컷 주 윈저 락스에 있는 관리 기관에 있습니다. |
 
-### Translation
+### 2. Translation
 
 ```bash
 python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "translation"
 ```
 
-Below is the prompt used to generate the answer. You can modify it in the [translation link](prompts/translation.txt). If you use few-shot in translation, the performance can improve.
+This is the prompt for translation. You can modify it in the [translation.txt](prompts/translation.txt).
 
 ```python
 PROMPT = """### Instruction: Translate English sentence into Korean. You may leave specific names as they are.
@@ -95,31 +103,29 @@ Korean: Did you finish your work?#
 English: {source_sentence} 
 Korean:"""
 ```
-
-### Translation sample result
+For example,
 ```python
 source_sentence = "Hey! I have some Kissflow Legal Review requests that are blocked by Tax and Accounting, can this be looked at?"
 ```
 
-| Model | Result |
-| --- | ---: |
-| KORani-v1-13B | "안녕하세요! 세금과 회계로 인해 막혀 있는 키스플로우 법률 검토 요청이 몇 개 있는데, 검토해 주실 수 있나요?" |
-| KORani-v2-13B | "안녕하세요! 제가 Kissflow Legal Review 요청을 목격했는데, 세무 및 회계 부서에서 차단하고 있는데 이 문제를 조사해 주시겠어요?" |
-| KORani-v3-13B | "안녕하세요! 저는 Kissflow Legal Review 요청이 세금과 회계에 의해 차단되고 있는데, 이 문제가 살펴볼 수 있을까요?" |
-| Vicuna 13B | "안녕하세요! 세금계산과 회계부서가 차단해 있는 Kissflow Legal Review 요청이 몇 개가 있습니까? 이것을 살펴보시겠습니까?" |
-| Koalpaca-13B | "야! 세금과 회계에 막힌 키싱플로우 법적 검토 요청이 있는데, 이거 검토해줄 수 있어?" |
-| DeepL | "안녕하세요! 세무 및 회계에서 차단된 Kissflow 법률 검토 요청이 몇 개 있는데요, 이 요청을 살펴볼 수 있나요?" |
-| ChatGPT 3.5 | "안녕하세요! 세무 및 회계 부서에서 차단된 몇 가지 Kissflow Legal Review 요청이 있습니다. 확인해 주실 수 있나요?" |
-| GPT4 | "헤이! 제가 Tax and Accounting에 의해 차단된 몇 가지 Kissflow 법률 검토 요청이 있는데, 이것을 확인해 주실 수 있나요?" |
+| Model | Score (averaged over 5 examples) | Output Example |
+| --- | :---: | ---: | 
+| GPT-4 | - | 헤이! 제가 Tax and Accounting에 의해 차단된 몇 가지 Kissflow 법률 검토 요청이 있는데, 이것을 확인해 주실 수 있나요? |
+| DeepL | 9.4 | 안녕하세요! 세무 및 회계에서 차단된 Kissflow 법률 검토 요청이 몇 개 있는데요, 이 요청을 살펴볼 수 있나요?  |
+| GPT-3.5-turbo | 8.6 | 안녕하세요! 세무 및 회계 부서에서 차단된 몇 가지 Kissflow Legal Review 요청이 있습니다. 확인해 주실 수 있나요? |
+| Vicuna-13B | 3.8 | 안녕하세요! 세금계산과 회계부서가 차단해 있는 Kissflow Legal Review 요청이 몇 개가 있습니까? 이것을 살펴보시겠습니까? |
+| KoAlpaca-13B | 5.6 | 야! 세금과 회계에 막힌 키싱플로우 법적 검토 요청이 있는데, 이거 검토해줄 수 있어? |
+| KORani-v1 | 7.5 | 안녕하세요! 세금과 회계로 인해 막혀 있는 키스플로우 법률 검토 요청이 몇 개 있는데, 검토해 주실 수 있나요? |
+| KORani-v2 | 5.4 | 안녕하세요! 제가 Kissflow Legal Review 요청을 목격했는데, 세무 및 회계 부서에서 차단하고 있는데 이 문제를 조사해 주시겠어요? |
+| KORani-v3 | 7.1 | 안녕하세요! 저는 Kissflow Legal Review 요청이 세금과 회계에 의해 차단되고 있는데, 이 문제가 살펴볼 수 있을까요? |
 
-
-### Summarization
+### 3. Summarization
 
 ```bash
 python inference.py --model_path "KRAFTON/KORani-v3-13B" --task "summarization"
 ```
 
-Below is the prompt used to generate the answer. You can modify it in the [summarization link](prompts/summarization.txt). It does not work for a max length of over 2048.
+This is the prompt for summarization. You can modify it in the [summarization link](prompts/summarization.txt). Keep in mind you did not exceed the maximum length = 2048.
 
 ```python
 PROMPT = """# Meeting note
@@ -128,9 +134,7 @@ PROMPT = """# Meeting note
 # Summarize the meeting note into 3 Korean sentences.
 ### Output: 1)"""
 ```
-
-### Summarization sample result
-
+For example,
 ```python
 target_document = """# Document
 전년도 대비 79명 늘어 1019명, 행정수요 대처 광양시의 공무원 정원이 크게 늘어나 행정서비스 향상이 기대된다. 
@@ -145,15 +149,15 @@ target_document = """# Document
 ### Assistant: 1)"""
 ```
 
-| Model | Result |
-| --- | ---: |
-| KORani-v1-13B |1) 광양시는 작년보다 79명이 늘어난 1019명의 일반직 공무원 정원을 행안부로부터 승인받았습니다. 2) 이는 광양시의 행정 수요 증가를 수용하기 위한 것입니다. 3) 이 정원 증가는 광양시 공무원들에게 더 많은 기회를 제공할 것입니다. |
-| KORani-v2-13B | 1)광양시의 공무원 정원은 이번 정원 확보로 1000명 주당 공무원 정원을 달성했습니다. 2) 이러한 충원은 지금까지 격무에 시달려온 공무원들에게 더욱 열심히 일할 수 있도록 활력을 불어넣으면서 지역사회와 국가의 발전을 지원하는 시너지 효과로 이어질 것으로 기대됩니다. 3) 광양시는 '기업유치추진단'을 폐지하고 '산단녹지관리센터'를 승인했으며, 이는 도시 개발에 한층 탄력을 받을 것으로 기대됩니다. |
-| KORani-v3-13B | 1)광양시의 공무원 정원은 지난해보다 79명이 늘어난 1019명으로 산정되었습니다.2) 이러한 충원은 지역사회와 국가 발전을 지원하는 행정서비스의 향상으로 이어질 것으로 기대됩니다.3) 시는 '이달 내에 정원 조례를 개정하고 직무분석을 통해 부서별로 정원을 조정할 계획'이며 행정서비스 향상을 위해 노력할 것이라고 밝혔습니다. |
-| Vicuna 13B | 1) 2018년도 광양시의 공무원 정원 1019명, 지난해 79명 증가. 2) 이번 정원 충원은 지금까지 격무에 시달려온 공무원들에게 더욱 열심히 일할 수 있도록 활력을 불어넣으면서 지역과 나라 발전을 뒷받침 하는 경제도시로서의 위상을 드높이는 시너지 효과로 이어질 것으로 기대된다. 3) 광양시는 전라남도로부터 4급 상설기구인‘산단녹지관리센터’를 승인 받아 운영하게 됨으로써 도시 개발에 한층 탄력을 받을 것으로 전망하고 있다. |
-| Koalpaca-13B | 1) 광양시는 작년보다 79명 늘어난 1019명의 공무원을 둘 수 있게 되었습니다. 2) 이는 행정안전부의 지침에 따른 것입니다. 3) 이로써 광양시는 한정된 예산으로 인해 발생했던 공무원들의 초과 근무 수당 지급 등의 문제를 해결 할 수 있게 되었습니다. |
-| GPT-3.5-turbo | 1) 광양시 공무원 정원이 79명 늘어 1019명으로 늘어나 행정서비스 향상이 기대된다고 밝혔다.2) 광양시는 이번 정원 충원으로 지역과 나라 발전을 뒷받침 하는 경제도시 위상을 드높일 것으로 기대된다. 3) 정원 조례를 개정하고, 직무분석을 통해 부서별 정원을 조정할 계획이다.|
-| GPT-4 | 1) 광양시의 공무원 정원이 전년도 대비 79명 늘어난 1019명으로 증가했다. 2) 이로 인해 행정서비스 향상이 기대되며, 지역과 나라 발전을 뒷받침하는 경제도시로서의 위상이 상승할 것으로 전망된다. 3) 한편, 광양시는 전라남도로부터 4급 상설기구인 '산단녹지관리센터'를 승인받아 도시 개발에 탄력을 받을 것으로 예상된다. |
+| Model | Score (averaged over 5 examples) | Output Example |
+| --- | :---: | ---: | 
+| GPT-4 | - | 1) 광양시의 공무원 정원이 전년도 대비 79명 늘어난 1019명으로 증가했다. 2) 이로 인해 행정서비스 향상이 기대되며, 지역과 나라 발전을 뒷받침하는 경제도시로서의 위상이 상승할 것으로 전망된다. 3) 한편, 광양시는 전라남도로부터 4급 상설기구인 '산단녹지관리센터'를 승인받아 도시 개발에 탄력을 받을 것으로 예상된다. |
+| GPT-3.5-turbo | 8.5 | 1) 광양시 공무원 정원이 79명 늘어 1019명으로 늘어나 행정서비스 향상이 기대된다고 밝혔다.2) 광양시는 이번 정원 충원으로 지역과 나라 발전을 뒷받침 하는 경제도시 위상을 드높일 것으로 기대된다. 3) 정원 조례를 개정하고, 직무분석을 통해 부서별 정원을 조정할 계획이다. |
+| Vicuna-13B | 7.4 | 1) 2018년도 광양시의 공무원 정원 1019명, 지난해 79명 증가. 2) 이번 정원 충원은 지금까지 격무에 시달려온 공무원들에게 더욱 열심히 일할 수 있도록 활력을 불어넣으면서 지역과 나라 발전을 뒷받침 하는 경제도시로서의 위상을 드높이는 시너지 효과로 이어질 것으로 기대된다. 3) 광양시는 전라남도로부터 4급 상설기구인‘산단녹지관리센터’를 승인 받아 운영하게 됨으로써 도시 개발에 한층 탄력을 받을 것으로 전망하고 있다. |
+| KoAlpaca-13B | 5.7 | 1) 광양시는 작년보다 79명 늘어난 1019명의 공무원을 둘 수 있게 되었습니다. 2) 이는 행정안전부의 지침에 따른 것입니다. 3) 이로써 광양시는 한정된 예산으로 인해 발생했던 공무원들의 초과 근무 수당 지급 등의 문제를 해결 할 수 있게 되었습니다. |
+| KORani-v1 | 7.0 | 1) 광양시는 작년보다 79명이 늘어난 1019명의 일반직 공무원 정원을 행안부로부터 승인받았습니다. 2) 이는 광양시의 행정 수요 증가를 수용하기 위한 것입니다. 3) 이 정원 증가는 광양시 공무원들에게 더 많은 기회를 제공할 것입니다. |
+| KORani-v2 | 6.2 | 1)광양시의 공무원 정원은 이번 정원 확보로 1000명 주당 공무원 정원을 달성했습니다. 2) 이러한 충원은 지금까지 격무에 시달려온 공무원들에게 더욱 열심히 일할 수 있도록 활력을 불어넣으면서 지역사회와 국가의 발전을 지원하는 시너지 효과로 이어질 것으로 기대됩니다. 3) 광양시는 '기업유치추진단'을 폐지하고 '산단녹지관리센터'를 승인했으며, 이는 도시 개발에 한층 탄력을 받을 것으로 기대됩니다. |
+| KORani-v3 | 6.9 | 1)광양시의 공무원 정원은 지난해보다 79명이 늘어난 1019명으로 산정되었습니다.2) 이러한 충원은 지역사회와 국가 발전을 지원하는 행정서비스의 향상으로 이어질 것으로 기대됩니다.3) 시는 '이달 내에 정원 조례를 개정하고 직무분석을 통해 부서별로 정원을 조정할 계획'이며 행정서비스 향상을 위해 노력할 것이라고 밝혔습니다. |
 
 ## Evaluation
 We tested model performance using GPT-4, and the code and results of the test can be found through the [AutoEvalGPT](https://github.com/krafton-ai/AutoEvalGPT).
